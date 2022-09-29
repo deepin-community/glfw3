@@ -1,0 +1,16 @@
+Description: Remove the date from the documentation footer to make the
+ build reproducible.
+Author: James Cowgill <james410@cowgill.org.uk>
+Forwarded: no
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/docs/footer.html
++++ b/docs/footer.html
+@@ -1,6 +1,6 @@
+ <address class="footer">
+ <p>
+-Last update on $date for $projectname $projectnumber
++$projectname $projectnumber
+ </p>
+ </address>
+ </body>
