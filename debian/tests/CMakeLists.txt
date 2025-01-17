@@ -1,6 +1,6 @@
 # Test CMake project to ensure the cmake config files work properly
 
-cmake_minimum_required(VERSION 3.7.2)
+cmake_minimum_required(VERSION 3.25)
 project(Glfw3Test C)
 
 # Try to find glfw3
