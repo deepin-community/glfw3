@@ -2,7 +2,7 @@ Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: glfw
 Upstream-Contact: Camilla Löwy <elmindreda@glfw.org>
 Source: https://www.glfw.org/
-License: ZLib
+License: Zlib
 
 Files: *
 Copyright:
@@ -20,24 +20,38 @@ License: Zlib
 Files: debian/*
 Copyright:
  2008 Gonéri Le Bouder <goneri@rulezlan.org>
- 2015-2020 James Cowgill <jcowgill@debian.org>
+ 2015-2024 James Cowgill <jcowgill@debian.org>
  2011 Mahyuddin Susanto <udienz@ubuntu.com>
  2014 Roman Valov <roman.valov@gmail.com>
 License: GPL-2+
+
+Files: deps/glad/*
+Copyright:
+ 2013-2022 David Herberth
+ 2013-2020 The Khronos Group Inc.
+License: WTFPL or CC0-1.0, and Apache-2.0
+
+Files: deps/wayland/*
+Copyright:
+ 2008-2013 Kristian Høgsberg
+ 2010-2013 Intel Corporation
+ 2013-2016 Collabora, Ltd.
+ 2013 Jasper St. Pierre
+ 2013 Rafael Antognolli
+ 2014 Jonas Ådahl
+ 2015-2017 Red Hat Inc.
+ 2015-2017 Samsung Electronics Co., Ltd
+ 2018 Simon Ser
+ 2020 Aleix Pol Gonzalez
+ 2020 Carlos Garnacho
+ 2022 Kenny Levinsen
+License: Expat
 
 Files:
  deps/getopt.h
  deps/getopt.c
 Copyright: Kim Gräsman
 License: BSD-3-clause
-
-Files: deps/glad/khrplatform.h
-Copyright: 2008-2018, The Khronos Group Inc
-License: MIT-X11
-
-Files: deps/glad/vk_platform.h
-Copyright: 2014-2017, The Khronos Group Inc
-License: Apache-2.0
 
 Files: deps/mingw/_mingw_dxhelper.h
 Copyright: n/a
@@ -65,10 +79,6 @@ License: Old-STB
  following license: you are granted a perpetual, irrevocable license
  to copy, modify, publish, and distribute this file as you see fit.
 
-Files: deps/vs2008/stdint.h
-Copyright: 2006-2008 Alexander Chemeris
-License: BSD-2-clause-allowed-endorsement
-
 Files: tests/triangle-vulkan.c
 Copyright:
  2015-2016 LunarG, Inc.
@@ -91,31 +101,6 @@ License: Apache-2.0
  On Debian systems, the complete text of the Apache
  License, version 2.0, can be found in the file
  `/usr/share/common-licenses/Apache-2.0'.
-
-License: BSD-2-clause-allowed-endorsement
- Redistribution and use in source and binary forms, with or without
- modification, are permitted provided that the following conditions are met:
- .
-   1. Redistributions of source code must retain the above copyright notice,
-      this list of conditions and the following disclaimer.
- .
-   2. Redistributions in binary form must reproduce the above copyright
-      notice, this list of conditions and the following disclaimer in the
-      documentation and/or other materials provided with the distribution.
- .
-   3. The name of the author may be used to endorse or promote products
-      derived from this software without specific prior written permission.
- .
- THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
- WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
- MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
- EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
- OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
- WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
- OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 License: BSD-3-clause
  Redistribution and use in source and binary forms, with or without
@@ -146,6 +131,10 @@ License: BSD-3-clause
  OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
  THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
  DAMAGE.
+
+License: CC0-1.0
+ On Debian systems, the full text of the Creative Commons Zero 1.0 Universal
+ public domain grant can be found in '/usr/share/common-licenses/CC0-1.0'.
 
 License: Expat
  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -200,25 +189,18 @@ License: LGPL-2.1+
  On Debian systems, the complete text of the GNU Lesser General Public
  License version 2.1 can be found in "/usr/share/common-licenses/LGPL-2.1".
 
-License: MIT-X11
- Permission is hereby granted, free of charge, to any person obtaining a
- copy of this software and/or associated documentation files (the
- "Materials"), to deal in the Materials without restriction, including
- without limitation the rights to use, copy, modify, merge, publish,
- distribute, sublicense, and/or sell copies of the Materials, and to
- permit persons to whom the Materials are furnished to do so, subject to
- the following conditions:
+License: WTFPL
+            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+                    Version 2, December 2004
  .
- The above copyright notice and this permission notice shall be included
- in all copies or substantial portions of the Materials.
+ Everyone is permitted to copy and distribute verbatim or modified
+ copies of this license document, and changing it is allowed as long
+ as the name is changed.
  .
- THE MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
- MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
- IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
- CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
- TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
- MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
+            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+ .
+  0. You just DO WHAT THE FUCK YOU WANT TO.
 
 License: Zlib
  This software is provided 'as-is', without any express or implied

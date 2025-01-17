@@ -1,32 +1,48 @@
 #!/usr/bin/make -f
 # -*- makefile -*-
+include /usr/share/dpkg/architecture.mk
+include /usr/share/dpkg/buildtools.mk
 
 export DEB_BUILD_MAINT_OPTIONS := hardening=+all
-export DEB_LDFLAGS_MAINT_APPEND := -Wl,--as-needed
 
-CONFIGURE_COMMON = -DBUILD_SHARED_LIBS=ON
+# The _DEFAULT_SOURCE workaround found in upstream CMakeLists.txt
+# doesn't detect non-Linux systems properly, so manually add the
+# define here as well.
+export DEB_CPPFLAGS_MAINT_APPEND := -D_DEFAULT_SOURCE
 
-# When executed, this becomes true if wayland should be skipped
-SKIP_WAYLAND := (! dh_listpackages | grep -q ^libglfw3-wayland$$)
+BUILD_WAYLAND = $(if $(findstring $(DEB_HOST_ARCH_OS),linux),ON,OFF)
+
+# glfw dynamically loads all its library dependencies using dlopen, so
+# we need to add the library dependencies for the packaging manually.
+#
+# Use Depends for packages required for commonly used backends, and
+# Suggests for extra packages.
+LIBS_X11 = -lXi -lXrandr -lXcursor -lXinerama -lX11-xcb -lXrender -lXext -lX11 -lGLX -lOpenGL
+LIBS_WAYLAND = -lwayland-client -lwayland-cursor -lwayland-egl -lxkbcommon -ldecor-0 -lEGL -lOpenGL
+LIBS_EXTRA = -lOSMesa -lEGL -lGLESv1_CM -lGLESv2
+LIBS_VULKAN = -lvulkan
+
+ifeq ($(BUILD_WAYLAND),ON)
+LIBS_DEPENDS = $(LIBS_X11) $(LIBS_WAYLAND)
+LIBS_SUGGESTS = $(LIBS_EXTRA) $(LIBS_VULKAN)
+else
+LIBS_DEPENDS = $(LIBS_X11)
+LIBS_SUGGESTS = $(LIBS_EXTRA)
+endif
 
 %:
 	dh $@
 
-override_dh_auto_clean:
-	dh_auto_clean -Bbuild-x11
-	dh_auto_clean -Bbuild-wayland
-
 override_dh_auto_configure:
-	dh_auto_configure -Bbuild-x11 -- $(CONFIGURE_COMMON) -DGLFW_BUILD_DOCS=ON
-	$(SKIP_WAYLAND) || dh_auto_configure -Bbuild-wayland -- $(CONFIGURE_COMMON) -DGLFW_USE_WAYLAND=ON
+	dh_auto_configure -- -DBUILD_SHARED_LIBS=ON -DGLFW_BUILD_WAYLAND=$(BUILD_WAYLAND)
 
-override_dh_auto_build:
-	dh_auto_build -Bbuild-x11
-	$(SKIP_WAYLAND) || dh_auto_build -Bbuild-wayland
-
-override_dh_auto_install:
-	dh_auto_install -Bbuild-x11
-	$(SKIP_WAYLAND) || dh_auto_install -Bbuild-wayland -- DESTDIR=$(CURDIR)/debian/tmp/wayland
+override_dh_shlibdeps:
+	dh_shlibdeps
+	$(CC) $(LDFLAGS) -xc -shared -Wl,--no-as-needed -o debian/tmp/dummy-depends.so /dev/null $(LIBS_DEPENDS)
+	$(CC) $(LDFLAGS) -xc -shared -Wl,--no-as-needed -o debian/tmp/dummy-suggests.so /dev/null $(LIBS_SUGGESTS)
+	dpkg-shlibdeps -Tdebian/libglfw3.substvars \
+		-dDepends -edebian/tmp/dummy-depends.so \
+		-dSuggests -edebian/tmp/dummy-suggests.so
 
 override_dh_installdocs:
 	dh_installdocs -plibglfw3-doc --doc-main-package=libglfw3-dev
